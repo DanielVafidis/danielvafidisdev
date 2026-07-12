@@ -166,8 +166,6 @@ function App() {
             © {new Date().getFullYear()} Daniel Vafidis
           </p>
           <nav className="footer-nav" aria-label="Footer">
-            <a href="#" className="footer-link">Privacy</a>
-            <a href="#" className="footer-link">Terms</a>
             <a href="mailto:hello@example.com" className="footer-link">Email</a>
           </nav>
         </div>
