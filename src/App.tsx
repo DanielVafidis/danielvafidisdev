@@ -1,17 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.scss'
 import { getResolvedTheme, setTheme, type Theme } from './theme'
 
 function App() {
   const [resolvedTheme, setResolvedTheme] = useState<Theme>(() => getResolvedTheme())
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)')
-    const onSystemThemeChange = () => setResolvedTheme(getResolvedTheme())
-
-    mediaQuery.addEventListener('change', onSystemThemeChange)
-    return () => mediaQuery.removeEventListener('change', onSystemThemeChange)
-  }, [])
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })

@@ -8,20 +8,12 @@ export function getStoredTheme(): Theme | null {
   return null
 }
 
-export function getSystemTheme(): Theme {
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-}
-
 export function getResolvedTheme(): Theme {
-  return getStoredTheme() ?? getSystemTheme()
+  return getStoredTheme() ?? 'light'
 }
 
-export function applyTheme(theme: Theme | null): void {
-  if (theme) {
-    document.documentElement.setAttribute('data-theme', theme)
-  } else {
-    document.documentElement.removeAttribute('data-theme')
-  }
+export function applyTheme(theme: Theme): void {
+  document.documentElement.setAttribute('data-theme', theme)
 }
 
 export function setTheme(theme: Theme): void {
@@ -30,5 +22,5 @@ export function setTheme(theme: Theme): void {
 }
 
 export function initTheme(): void {
-  applyTheme(getStoredTheme())
+  applyTheme(getResolvedTheme())
 }
