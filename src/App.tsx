@@ -1,31 +1,29 @@
+import { useEffect, useState } from 'react'
 import './App.scss'
-
-import { useState } from 'react'
+import { getResolvedTheme, setTheme, type Theme } from './theme'
 
 function App() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
+  const [resolvedTheme, setResolvedTheme] = useState<Theme>(() => getResolvedTheme())
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: light)')
+    const onSystemThemeChange = () => setResolvedTheme(getResolvedTheme())
+
+    mediaQuery.addEventListener('change', onSystemThemeChange)
+    return () => mediaQuery.removeEventListener('change', onSystemThemeChange)
+  }, [])
 
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert('Thank you for reaching out! I\'ll get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+  const toggleTheme = () => {
+    const nextTheme: Theme = resolvedTheme === 'dark' ? 'light' : 'dark'
+    setTheme(nextTheme)
+    setResolvedTheme(nextTheme)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+  const nextTheme: Theme = resolvedTheme === 'dark' ? 'light' : 'dark'
 
   return (
     <div className="app">
@@ -35,6 +33,14 @@ function App() {
           <a href="#about">About</a>
           <a href="#work">Work</a>
           <a href="#contact">Contact</a>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${nextTheme} mode`}
+          >
+            {nextTheme.toUpperCase()}
+          </button>
         </div>
       </nav>
 
@@ -75,127 +81,81 @@ function App() {
           <article className="card">
             <div className="card-header">
               <span className="card-index">001</span>
-              <h3 className="card-title">Project Alpha</h3>
+              <h3 className="card-title">Neterium Client Portal</h3>
             </div>
             <p className="card-description">
-              A next-generation platform for collaborative design and development.
+              Frontend for the client portal at a RegTech screening company —
+              the cockpit where banks and fintechs tune their AML/sanctions stack
+              and read live screening stats. Settings, analytics, operational clarity
+              for watchlist infrastructure that runs at API speed.
             </p>
             <div className="card-tags">
-              <span className="tag">React</span>
-              <span className="tag">TypeScript</span>
-              <span className="tag">Vite</span>
+              <span className="tag">Client portal</span>
+              <span className="tag">Dashboard</span>
+              <span className="tag">RegTech</span>
             </div>
           </article>
 
           <article className="card">
             <div className="card-header">
               <span className="card-index">002</span>
-              <h3 className="card-title">Project Beta</h3>
+              <h3 className="card-title">Japanese Learning Platform</h3>
             </div>
             <p className="card-description">
-              Real-time analytics dashboard with data visualizations and insights.
+              AI-driven build of a Japanese learning site — agents shipped the grind,
+              humans steered curriculum and UX. From zero to shippable via tight agentic loops.
             </p>
             <div className="card-tags">
-              <span className="tag">D3.js</span>
-              <span className="tag">WebSocket</span>
+              <span className="tag">AI-driven development</span>
+              <span className="tag">Agents</span>
+              <span className="tag">EdTech</span>
             </div>
           </article>
 
           <article className="card">
             <div className="card-header">
               <span className="card-index">003</span>
-              <h3 className="card-title">Project Gamma</h3>
+              <h3 className="card-title">Client Agentic Workflows</h3>
             </div>
             <p className="card-description">
-              Mobile-first web application with offline capabilities and sync.
+              Custom AI workflows that eat redundant client work. Automate the busywork,
+              free the humans for decisions that matter.
             </p>
             <div className="card-tags">
-              <span className="tag">PWA</span>
-              <span className="tag">Service Workers</span>
+              <span className="tag">Agentic workflows</span>
+              <span className="tag">Automation</span>
+              <span className="tag">AI ops</span>
             </div>
           </article>
         </section>
 
         <section className="contact" id="contact">
           <p className="section-label">03 — Contact</p>
-          <div className="contact-header">
-            <p className="contact-intro">
-              Got an interesting project? I'm open to discussing new opportunities,
-              creative ideas, or ways to collaborate.
-            </p>
-          </div>
+          <p className="contact-intro">
+            Got an interesting project? I'm open to discussing new opportunities,
+            creative ideas, or ways to collaborate.
+          </p>
 
-          <div className="contact-content">
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="form-input"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="form-input"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="message" className="form-label">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="form-textarea"
-                  rows={5}
-                  required
-                />
-              </div>
-
-              <button type="submit" className="form-submit">
-                → Send Message
-              </button>
-            </form>
-
-            <div className="contact-alternative">
-              <p className="alternative-text">Prefer email?</p>
-              <a href="mailto:hello@example.com" className="text-link">
-                → hello@example.com
-              </a>
-
-              <div className="social-links">
-                <a
-                  href="https://linkedin.com/in/yourprofile"
-                  className="text-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  → LinkedIn
-                </a>
-                <a
-                  href="https://github.com/yourusername"
-                  className="text-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  → GitHub
-                </a>
-              </div>
-            </div>
+          <div className="contact-links">
+            <a href="mailto:hello@example.com" className="text-link">
+              → Email
+            </a>
+            <a
+              href="https://linkedin.com/in/yourprofile"
+              className="text-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              → LinkedIn
+            </a>
+            <a
+              href="https://twitter.com/yourhandle"
+              className="text-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              → Twitter
+            </a>
           </div>
         </section>
       </main>

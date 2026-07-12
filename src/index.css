@@ -26,7 +26,7 @@
   line-height: 1.6;
   font-weight: 400;
   font-size: 14px;
-  color-scheme: light dark;
+  color-scheme: dark;
   color: var(--color-text);
   background-color: var(--color-bg);
   font-synthesis: none;
@@ -36,6 +36,24 @@
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #0a0a0a;
+  --color-text: #e8e8e8;
+  --color-muted: #888;
+  --color-border: #333;
+  --color-accent: #e8e8e8;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --color-bg: #f5f5f0;
+  --color-text: #0a0a0a;
+  --color-muted: #666;
+  --color-border: #ccc;
+  --color-accent: #0a0a0a;
+  color-scheme: light;
 }
 
 body {
@@ -54,11 +72,12 @@ a {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
     --color-bg: #f5f5f0;
     --color-text: #0a0a0a;
     --color-muted: #666;
     --color-border: #ccc;
     --color-accent: #0a0a0a;
+    color-scheme: light;
   }
 }
