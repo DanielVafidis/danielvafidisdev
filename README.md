@@ -9,18 +9,19 @@ A modern, clean portfolio website built with React, TypeScript, and Vite. Inspir
 - **Modern Stack**: React 19, TypeScript 5.9, Vite 7
 - **Clean Design**: Perplexity.ai-inspired minimal aesthetic
 - **Responsive**: Mobile-first design that works on all devices
-- **SCSS**: Organized with variables, mixins, and nesting
-- **Dark/Light Mode**: Automatic theme switching based on system preferences
+- **Plain CSS**: Single stylesheet with CSS custom properties
+- **Dark/Light Mode**: Manual theme toggle with persistence
 - **SEO Optimized**: Complete Open Graph and Twitter Card meta tags
 - **Accessible**: Semantic HTML and ARIA support
-- **Fast**: Optimized build with lazy loading and code splitting
+- **Fast**: Optimized build with Vite
 
 ## 🛠️ Tech Stack
 
 - **Framework**: React 19
 - **Language**: TypeScript 5.9
 - **Build Tool**: Vite 7
-- **Styling**: SCSS with custom design system
+- **Styling**: Plain CSS (`src/index.css`) with CSS custom properties
+- **Fonts**: IBM Plex Mono via `@fontsource`
 - **Linting**: ESLint 9 (flat config)
 - **Type Checking**: TypeScript strict mode
 
@@ -49,19 +50,17 @@ npm run dev
 
 ```bash
 npm run dev          # Start development server
-npm run build        # Build for production
+npm run build        # Typecheck + build for production
 npm run preview      # Preview production build
 npm run lint         # Run ESLint
-npm run typecheck    # Run TypeScript type checking
 ```
 
 ## 📁 Project Structure
 
 ```
 src/
-├── App.scss         # Main styles (SCSS with variables & mixins)
-├── App.tsx          # Main application component
-├── index.css        # Global styles
+├── App.tsx          # Main application component (includes theme toggle)
+├── index.css        # Global styles and theme variables
 └── main.tsx         # Application entry point
 
 public/
@@ -74,9 +73,9 @@ public/
 
 The project uses a minimal design system with:
 - **Spacing Scale**: xs to 3xl (0.5rem to 3rem)
-- **Colors**: Warm dark/light themes
-- **Typography**: System fonts for optimal performance
-- **Components**: Reusable SCSS mixins for consistency
+- **Colors**: Warm dark/light themes via `data-theme` and CSS variables
+- **Typography**: IBM Plex Mono
+- **Styles**: Single plain CSS file — no SCSS, no CSS-in-JS
 
 ## 📝 Customization
 
@@ -87,8 +86,8 @@ The project uses a minimal design system with:
    - Add your projects
    - Update contact links and email
 
-2. **Styling**: Edit `src/App.scss`
-   - Customize colors in variables section
+2. **Styling**: Edit `src/index.css`
+   - Customize colors in the CSS variables section
    - Adjust spacing and typography
    - Modify component styles
 
@@ -136,26 +135,3 @@ MIT License - feel free to use this for your own portfolio!
 
 - Design inspired by [Perplexity.ai](https://perplexity.ai) and [Claude](https://claude.ai)
 - Built with [Vite](https://vitejs.dev/) and [React](https://react.dev/)
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```

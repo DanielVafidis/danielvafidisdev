@@ -4,9 +4,11 @@ import '@fontsource/ibm-plex-mono/400.css'
 import '@fontsource/ibm-plex-mono/500.css'
 import './index.css'
 import App from './App.tsx'
-import { initTheme } from './theme'
 
-initTheme()
+document.documentElement.setAttribute(
+  'data-theme',
+  localStorage.getItem('theme') === 'dark' ? 'dark' : 'light',
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
