@@ -11,23 +11,31 @@ const work = [
     index: '001',
     title: 'Neterium Client Portal',
     description:
-      'Frontend for the client portal at a RegTech screening company — the cockpit where banks and fintechs tune their AML/sanctions stack and read live screening stats. Settings, analytics, operational clarity for watchlist infrastructure that runs at API speed.',
-    tags: ['Client portal', 'Dashboard', 'RegTech'],
+      'Production frontend for a RegTech AML/sanctions screening platform used by banks and fintechs. Owned the client portal — configuration, live screening analytics, and operational views that make high-throughput watchlist infrastructure legible to compliance and ops teams.',
+    tags: ['React', 'TypeScript', 'RegTech', 'Dashboards'],
   },
   {
     index: '002',
     title: 'Japanese Learning Platform',
     description:
-      'AI-driven build of a Japanese learning site — agents shipped the grind, humans steered curriculum and UX. From zero to shippable via tight agentic loops.',
-    tags: ['AI-driven development', 'Agents', 'EdTech'],
+      'End-to-end product build of an AI-native language learning platform. Orchestrated multi-agent development loops for curriculum tooling, UX, and feature delivery — humans set direction and quality bars; agents shipped the implementation surface area at product speed.',
+    tags: ['AI-native product', 'Agents', 'EdTech', 'Full-stack'],
   },
   {
     index: '003',
     title: 'Client Agentic Workflows',
     description:
-      'Custom AI workflows that eat redundant client work. Automate the busywork, free the humans for decisions that matter.',
-    tags: ['Agentic workflows', 'Automation', 'AI ops'],
+      'Designed and shipped custom agentic workflows that absorb repetitive client operations — research, drafting, triage, and handoff. Reduced manual cycle time so teams spend attention on judgment calls instead of process choreography.',
+    tags: ['Agentic systems', 'Automation', 'LLM ops', 'Process design'],
   },
+]
+
+const focus = [
+  'AI-native product engineering',
+  'Agentic workflows',
+  'Frontend systems',
+  'RegTech / compliance UX',
+  'Rapid productization',
 ]
 
 function App() {
@@ -60,9 +68,12 @@ function App() {
       </nav>
 
       <header className="header">
-        <p className="label">Product Engineer & Creative Technologist</p>
+        <p className="label">Product Engineer · AI-Native Systems</p>
         <h1 className="name">Daniel Vafidis</h1>
-        <p className="tagline">Steer the vision. Agents handle the grind.</p>
+        <p className="tagline">
+          I build production AI products and the agentic workflows that keep them
+          shipping — clear direction for humans, high leverage for machines.
+        </p>
         <a className="cta" href="#contact">
           → Contact
         </a>
@@ -72,20 +83,29 @@ function App() {
         <section className="section" id="about">
           <p className="label">01 — About</p>
           <p className="prose">
-            Hi, I'm Daniel. Product engineer and creative technologist — I build
-            <strong> AI-native systems</strong> and the <strong>agentic workflows</strong> that
-            run them. Humans set direction and quality bars; agents research, implement,
-            and iterate. Functional first, refined second.
+            Product engineer focused on <strong>AI-native systems</strong> —
+            products that treat models and agents as first-class infrastructure,
+            not bolt-ons. I take vague product intent and turn it into
+            shippable interfaces, workflows, and feedback loops.
           </p>
           <p className="prose">
-            I believe in tight feedback loops, composable tooling, and workflows that
-            get faster every iteration. When I'm not building, I'm testing new models
-            and documenting what actually works.
+            Recent work spans regulated fintech UX, education products, and
+            client-facing automation. Strengths: frontend systems that stay
+            coherent under complexity, agentic process design, and tight
+            iterate-ship cycles. Functional first, refined until it holds up
+            in production.
           </p>
+          <div className="card-tags focus-tags">
+            {focus.map((item) => (
+              <span className="tag" key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
         </section>
 
         <section className="section" id="work">
-          <p className="label">02 — Recent Work</p>
+          <p className="label">02 — Selected Work</p>
 
           {work.map((item) => (
             <article className="card" key={item.index}>
@@ -108,11 +128,12 @@ function App() {
         <section className="section contact" id="contact">
           <p className="label">03 — Contact</p>
           <p className="prose contact-intro">
-            Got an interesting project? I'm open to discussing new opportunities,
-            creative ideas, or ways to collaborate.
+            Open to product engineering roles, AI systems work, and
+            collaborations where agents and humans need a clear operating
+            model. Happy to talk scope, constraints, and timelines.
           </p>
           <div className="contact-links">
-            <a href="mailto:hello@example.com" className="text-link">
+            <a href="mailto:daniel.vafidis@gmail.com" className="text-link">
               → Email
             </a>
             <a
@@ -137,7 +158,7 @@ function App() {
 
       <footer className="footer">
         <p className="copyright">© {new Date().getFullYear()} Daniel Vafidis</p>
-        <a href="mailto:hello@example.com" className="footer-link">
+        <a href="mailto:daniel.vafidis@gmail.com" className="footer-link">
           Email
         </a>
       </footer>

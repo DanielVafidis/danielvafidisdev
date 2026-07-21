@@ -195,6 +195,10 @@ a {
   font-weight: 500;
 }
 
+.focus-tags {
+  margin-top: var(--space-lg);
+}
+
 .card {
   padding: var(--space-lg) 0;
   border-bottom: 1px solid var(--color-border);
